@@ -1,0 +1,30 @@
+{
+  "name": "shunyabar-labs-docs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "validate": "node scripts/validate-build.mjs"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.2.1",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.1",
+    "katex": "^0.16.47",
+    "mermaid": "^11.16.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math-extended": "^6.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

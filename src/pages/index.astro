@@ -1,0 +1,164 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { sortBlogEntries } from '../lib/content';
+import { withBase } from '../lib/paths';
+
+const entries = await getCollection('docs');
+const posts = sortBlogEntries(entries);
+const featured = posts[0];
+const recent = posts.slice(1, 4);
+---
+
+<BaseLayout
+  title="ShunyaBar Labs"
+  description="Physics-informed constraint intelligence and proof-aware optimization from ShunyaBar Labs."
+  currentPath="/"
+>
+  <section class="home-hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span></span> Field notes from the arithmetic manifold</div>
+      <h1>Logic should be<br /><em>a utility.</em></h1>
+      <p>
+        ShunyaBar Labs builds <strong>Navokoj</strong>—an industrial SAT and MaxSAT engine that replaces
+        combinatorial search with continuous phase transitions, backed by downloadable proof artifacts.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={withBase('/blog/multiplicative-archaeology/')}>Read the latest essay <span>↗</span></a>
+        <a class="button button-quiet" href={withBase('/core-vision/')}>Explore the theory</a>
+      </div>
+      <div class="hero-note">
+        <span>Independent research lab</span>
+        <span>Open preprints</span>
+        <span>Production API</span>
+      </div>
+    </div>
+
+    <div class="hero-field" aria-label="A geometric field flowing from constraints to a verified solution">
+      <div class="field-label field-label-input">Constraint field</div>
+      <div class="field-label field-label-output">Verified assignment</div>
+      <svg viewBox="0 0 620 540" role="img" aria-hidden="true">
+        <defs>
+          <pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M28 0H0V28" fill="none"></path>
+          </pattern>
+          <radialGradient id="hero-glow">
+            <stop offset="0" stop-opacity=".32"></stop>
+            <stop offset="1" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <rect width="620" height="540" fill="url(#hero-grid)"></rect>
+        <circle class="field-glow" cx="424" cy="266" r="184" fill="url(#hero-glow)"></circle>
+        <g class="field-lines">
+          <path d="M62 112C172 112 216 256 312 256S424 112 558 112"></path>
+          <path d="M62 186C194 186 222 304 328 304S442 188 558 188"></path>
+          <path d="M62 262C172 262 214 216 316 216S450 266 558 266"></path>
+          <path d="M62 338C178 338 222 370 326 370S434 340 558 340"></path>
+          <path d="M62 414C192 414 236 332 334 332S448 416 558 416"></path>
+        </g>
+        <g class="field-nodes">
+          <circle cx="80" cy="112" r="7"></circle><circle cx="80" cy="186" r="7"></circle>
+          <circle cx="80" cy="262" r="7"></circle><circle cx="80" cy="338" r="7"></circle>
+          <circle cx="80" cy="414" r="7"></circle><circle cx="424" cy="266" r="34"></circle>
+          <circle cx="540" cy="112" r="7"></circle><circle cx="540" cy="188" r="7"></circle>
+          <circle cx="540" cy="266" r="7"></circle><circle cx="540" cy="340" r="7"></circle>
+          <circle cx="540" cy="416" r="7"></circle>
+        </g>
+        <g class="field-core"><circle cx="424" cy="266" r="13"></circle><path d="m417 266 5 5 10-12"></path></g>
+      </svg>
+      <div class="field-stat"><strong>ρ ≥ 0.99</strong><span>correlation guard</span></div>
+      <div class="field-caption">Prime-weighted flow through a continuous energy landscape.</div>
+    </div>
+  </section>
+
+  <section class="home-proof-strip" aria-label="ShunyaBar Labs by the numbers">
+    <div class="home-stats">
+      <div><strong>3.7 ms</strong><span>SUTRA median latency</span></div>
+      <div><strong>90.1%</strong><span>SUTRA complete-SAT</span></div>
+      <div><strong>5,140</strong><span>SUTRA workload runs</span></div>
+      <div><strong>113M</strong><span>NitroSAT V3 clauses</span></div>
+      <div><strong>10M</strong><span>Q-State constraints</span></div>
+    </div>
+    <p class="home-evidence">
+      Distinct campaigns —
+      <a href="https://huggingface.co/buckets/sethuiyer/shunyabar-evidence-v1">open the evidence ledger.</a>
+    </p>
+  </section>
+
+  <section class="home-section latest-writing">
+    <header class="section-heading">
+      <div>
+        <span class="section-index">01</span>
+        <p>Latest writing</p>
+        <h2>Notes from the edge of<br />logic and physics.</h2>
+      </div>
+      <a href={withBase('/blog/')}>View all writing <span>↗</span></a>
+    </header>
+    <BlogCard entry={featured} featured index={0} />
+    <div class="blog-card-grid">
+      {recent.map((entry, index) => <BlogCard {entry} index={index + 1} />)}
+    </div>
+  </section>
+
+  <section class="home-section reader-lanes">
+    <header class="section-heading">
+      <div>
+        <span class="section-index">02</span>
+        <p>Choose a path</p>
+        <h2>One theory,<br />three ways in.</h2>
+      </div>
+    </header>
+    <div class="lane-grid">
+      <a href={withBase('/getting-started/quick-start/')}>
+        <span class="lane-number">I</span>
+        <small>For builders</small>
+        <h3>Ship a feature this week.</h3>
+        <p>Send a problem to the API, inspect the result, and verify the assignment offline.</p>
+        <strong>Start building →</strong>
+      </a>
+      <a href={withBase('/marketing/use-cases/')}>
+        <span class="lane-number">II</span>
+        <small>For integrators</small>
+        <h3>Turn constraints into a product.</h3>
+        <p>Map scheduling, routing, and allocation problems onto a verifiable optimization service.</p>
+        <strong>Explore use cases →</strong>
+      </a>
+      <a href={withBase('/axiom-architecture/')}>
+        <span class="lane-number">III</span>
+        <small>For researchers</small>
+        <h3>Read the mathematics.</h3>
+        <p>Follow prime weighting, partition functions, and phase transitions down to the axioms.</p>
+        <strong>Enter the theory →</strong>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section project-spotlight">
+    <div class="spotlight-copy">
+      <span class="section-index">03</span>
+      <p>Open-source benchmark</p>
+      <h2>NitroSAT makes the claims reproducible.</h2>
+      <p>
+        The open-source solver behind Navokoj's Pro engine ships 358 instances across 19 problem types,
+        with verification scripts and a complete Zenodo record.
+      </p>
+      <a class="button button-primary" href={withBase('/projects/nitrosat/')}>Inspect NitroSAT <span>↗</span></a>
+    </div>
+    <div class="spotlight-ledger">
+      <div><span>Average satisfaction</span><strong>99.58%</strong></div>
+      <div><span>Problem types</span><strong>19</strong></div>
+      <div><span>Largest perfect solve</span><strong>354,890 <small>clauses</small></strong></div>
+      <div><span>Renumbering deviation</span><strong>0.0000%</strong></div>
+    </div>
+  </section>
+
+  <section class="home-cta">
+    <p>Keep following the field notes.</p>
+    <h2>Research updates, product notes,<br />and reproducible results.</h2>
+    <div>
+      <a class="button button-primary" href={withBase('/rss.xml')}>Subscribe via RSS</a>
+      <a class="button button-quiet" href="mailto:contact@shunyabar.foo">Contact the lab</a>
+    </div>
+  </section>
+</BaseLayout>

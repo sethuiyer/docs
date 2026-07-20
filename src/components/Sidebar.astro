@@ -1,0 +1,31 @@
+---
+import { navigation } from '../data/navigation';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav class="side-navigation" aria-label="All sections">
+  <div class="side-navigation-title">
+    <span>Field guide</span>
+    <small>77 notes</small>
+  </div>
+  {
+    navigation.map((group) => (
+      <details open={group.items.some((item) => item.path === currentPath)}>
+        <summary>{group.label}</summary>
+        <div>
+          {group.items.map((item) => (
+            <a href={withBase(item.path)} aria-current={item.path === currentPath ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </details>
+    ))
+  }
+</nav>

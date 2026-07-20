@@ -1,0 +1,69 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { orderedPages } from '../data/navigation';
+import { headingsFromEntry, metaFromEntry, sortBlogEntries } from '../lib/content';
+import { routeFromId, slugFromRoute } from '../lib/paths';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('docs');
+  return entries
+    .filter((entry) => entry.id !== 'index')
+    .map((entry) => {
+      const route = routeFromId(entry.id);
+      return {
+        params: { slug: slugFromRoute(route) },
+        props: { entry }
+      };
+    });
+}
+
+interface Props {
+  entry: CollectionEntry<'docs'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const headings = headingsFromEntry(entry);
+const meta = metaFromEntry(entry);
+const allEntries = await getCollection('docs');
+let previous: { label: string; path: string } | undefined;
+let next: { label: string; path: string } | undefined;
+
+if (meta.blog) {
+  const posts = sortBlogEntries(allEntries);
+  const index = posts.findIndex((post) => post.id === entry.id);
+  if (index < posts.length - 1) {
+    const target = metaFromEntry(posts[index + 1]);
+    previous = { label: target.title, path: target.path };
+  }
+  if (index > 0) {
+    const target = metaFromEntry(posts[index - 1]);
+    next = { label: target.title, path: target.path };
+  }
+} else {
+  const pages = orderedPages.filter((item, index, items) => items.findIndex((candidate) => candidate.path === item.path) === index);
+  const index = pages.findIndex((item) => item.path === meta.path);
+  if (index > 0) previous = pages[index - 1];
+  if (index >= 0 && index < pages.length - 1) next = pages[index + 1];
+}
+---
+
+<ArticleLayout
+  title={meta.title}
+  description={meta.description}
+  currentPath={meta.path}
+  section={meta.section}
+  readingMinutes={meta.readingMinutes}
+  {headings}
+  publishedAt={meta.blog?.publishedAt}
+  articleType={meta.blog?.type}
+  tags={meta.blog?.tags}
+  author={meta.author}
+  materials={meta.materials}
+  {previous}
+  {next}
+  draft={meta.draft}
+>
+  <Content />
+</ArticleLayout>

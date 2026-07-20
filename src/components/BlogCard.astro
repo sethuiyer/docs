@@ -1,0 +1,44 @@
+---
+import type { DocEntry } from '../lib/content';
+import { formatDate, metaFromEntry } from '../lib/content';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  entry: DocEntry;
+  featured?: boolean;
+  index?: number;
+}
+
+const { entry, featured = false, index = 0 } = Astro.props;
+const meta = metaFromEntry(entry);
+---
+
+<article class:list={['blog-card', { 'blog-card-featured': featured }]}>
+  <a class="blog-card-link" href={withBase(meta.path)} aria-label={`Read ${meta.title}`}>
+    <div class="blog-card-visual" aria-hidden="true">
+      <span class="visual-index">{String(index + 1).padStart(2, '0')}</span>
+      <svg viewBox="0 0 320 180">
+        <defs>
+          <pattern id={`grid-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M20 0H0V20" fill="none"></path>
+          </pattern>
+        </defs>
+        <rect width="320" height="180" fill={`url(#grid-${index})`}></rect>
+        <circle cx={74 + index * 11} cy={92 - index * 4} r="42"></circle>
+        <circle cx={190 - index * 7} cy={62 + index * 5} r="24"></circle>
+        <path d={`M34 ${136 - index * 3} C104 ${44 + index * 8}, 196 ${154 - index * 5}, 286 42`}></path>
+      </svg>
+      <span class="visual-tag">{meta.blog?.tags[0]}</span>
+    </div>
+    <div class="blog-card-copy">
+      <div class="blog-card-meta">
+        <span>{meta.blog?.type}</span>
+        <time datetime={meta.blog?.publishedAt}>{formatDate(meta.blog!.publishedAt)}</time>
+        <span>{meta.readingMinutes} min</span>
+      </div>
+      <h2>{meta.title}</h2>
+      <p>{meta.description}</p>
+      <span class="read-link">Read the note <span aria-hidden="true">↗</span></span>
+    </div>
+  </a>
+</article>

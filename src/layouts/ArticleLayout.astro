@@ -1,0 +1,193 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { formatDate } from '../lib/content';
+import { withBase } from '../lib/paths';
+
+interface PageLink {
+  label: string;
+  path: string;
+}
+
+interface MaterialLink {
+  label: string;
+  href: string;
+  note?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath: string;
+  section: string;
+  readingMinutes: number;
+  headings: MarkdownHeading[];
+  publishedAt?: string;
+  articleType?: string;
+  tags?: string[];
+  author?: string;
+  materials?: MaterialLink[];
+  previous?: PageLink;
+  next?: PageLink;
+  draft?: boolean;
+}
+
+const {
+  title,
+  description,
+  currentPath,
+  section,
+  readingMinutes,
+  headings,
+  publishedAt,
+  articleType,
+  tags = [],
+  author,
+  materials = [],
+  previous,
+  next,
+  draft = false
+} = Astro.props;
+---
+
+<BaseLayout
+  {title}
+  {description}
+  {currentPath}
+  pageType="article"
+  {publishedAt}
+  {tags}
+  noindex={draft}
+>
+  <div class="reading-progress" data-reading-progress></div>
+  <div class="article-shell">
+    <aside class="article-sidebar"><Sidebar {currentPath} /></aside>
+    <article class="article-column" data-article>
+      <header class="article-context">
+        <div class="breadcrumb">
+          <a href={withBase('/')}>Field notes</a>
+          <span aria-hidden="true">/</span>
+          <span>{section}</span>
+        </div>
+        <div class="article-facts">
+          {draft && <span class="draft-badge">Draft</span>}
+          {articleType && <span>{articleType}</span>}
+          {publishedAt && <time datetime={publishedAt}>{formatDate(publishedAt)}</time>}
+          <span>{readingMinutes} min read</span>
+        </div>
+      </header>
+
+      {
+        headings.some((heading) => heading.depth === 2) && (
+          <details class="mobile-toc">
+            <summary>On this page</summary>
+            <TableOfContents {headings} />
+          </details>
+        )
+      }
+
+      <div class="prose">
+        <slot />
+      </div>
+
+      <footer class="article-footer">
+        <div class="author-note">
+          <span class="author-monogram">SI</span>
+          <div>
+            <strong>{author ?? 'Sethurathienam Iyer'}</strong>
+            <p>Founder of ShunyaBar Labs. Researching arithmetic geometry, constraint intelligence, and proof-aware optimization.</p>
+          </div>
+        </div>
+        {
+          tags.length > 0 && (
+            <div class="tag-list" aria-label="Article tags">
+              {tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          )
+        }
+        {
+          materials.length > 0 && (
+            <div class="article-materials">
+              <span>Materials</span>
+              {materials.map((material) => (
+                <a href={material.href}>
+                  {material.label}
+                  {material.note && <small>{material.note}</small>}
+                </a>
+              ))}
+            </div>
+          )
+        }
+        <nav class="article-pagination" aria-label="Previous and next pages">
+          {previous ? <a href={withBase(previous.path)}><small>Previous</small><strong>← {previous.label}</strong></a> : <span />}
+          {next && <a class="next-page" href={withBase(next.path)}><small>Next</small><strong>{next.label} →</strong></a>}
+        </nav>
+      </footer>
+    </article>
+    <aside class="article-toc"><TableOfContents {headings} /></aside>
+  </div>
+</BaseLayout>
+
+<script>
+  const progress = document.querySelector<HTMLElement>('[data-reading-progress]');
+  const article = document.querySelector<HTMLElement>('[data-article]');
+  const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.table-of-contents a[href^="#"]'));
+  const headings = tocLinks
+    .map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+    .filter((heading): heading is HTMLElement => Boolean(heading));
+
+  function updateReadingState() {
+    if (progress && article) {
+      const start = article.offsetTop;
+      const distance = Math.max(1, article.offsetHeight - innerHeight);
+      const value = Math.min(1, Math.max(0, (scrollY - start) / distance));
+      progress.style.transform = `scaleX(${value})`;
+    }
+
+    let active: HTMLElement | undefined;
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top <= 140) active = heading;
+    }
+    tocLinks.forEach((link) => link.toggleAttribute('data-active', active?.id === decodeURIComponent(link.hash.slice(1))));
+  }
+
+  addEventListener('scroll', updateReadingState, { passive: true });
+  updateReadingState();
+
+  const mermaidBlocks = Array.from(document.querySelectorAll<HTMLElement>('.prose pre > code.language-mermaid'))
+    .map((code) => code.parentElement)
+    .filter((pre): pre is HTMLPreElement => Boolean(pre));
+
+  if (mermaidBlocks.length) {
+    const { default: mermaid } = await import('mermaid');
+    const nodes = mermaidBlocks.map((pre) => {
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid';
+      diagram.textContent = pre.textContent?.trim() ?? '';
+      pre.replaceWith(diagram);
+      return diagram;
+    });
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'neutral',
+      flowchart: { useMaxWidth: true, htmlLabels: false }
+    });
+    await mermaid.run({ nodes });
+  }
+
+  document.querySelectorAll<HTMLPreElement>('.prose pre').forEach((pre) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy';
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(pre.textContent ?? '');
+      button.textContent = 'Copied';
+      setTimeout(() => (button.textContent = 'Copy'), 1400);
+    });
+    pre.append(button);
+  });
+</script>

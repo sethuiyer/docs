@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+---
+
+<BaseLayout title="Page not found" description="The requested ShunyaBar Labs page could not be found." noindex>
+  <section class="not-found">
+    <span>404 / Empty set</span>
+    <h1>This path does not<br />resolve.</h1>
+    <p>The page may have moved, or the constraint was never satisfiable.</p>
+    <div>
+      <a class="button button-primary" href={withBase('/')}>Return home</a>
+      <button class="button button-quiet" type="button" data-search-open>Search the field guide</button>
+    </div>
+  </section>
+</BaseLayout>

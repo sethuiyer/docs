@@ -1,0 +1,101 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SearchDialog from '../components/SearchDialog.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  title?: string;
+  description: string;
+  currentPath?: string;
+  pageType?: 'website' | 'article';
+  publishedAt?: string;
+  tags?: string[];
+  noindex?: boolean;
+}
+
+const {
+  title = 'ShunyaBar Labs',
+  description,
+  currentPath = '/',
+  pageType = 'website',
+  publishedAt,
+  tags = [],
+  noindex = false
+} = Astro.props;
+const pageTitle = title === 'ShunyaBar Labs' ? title : `${title} · ShunyaBar Labs`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const jsonLd = pageType === 'article'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      datePublished: publishedAt,
+      author: {
+        '@type': 'Person',
+        name: 'Sethurathienam Iyer',
+        sameAs: 'https://orcid.org/0009-0008-5446-2856'
+      },
+      publisher: { '@type': 'Organization', name: 'ShunyaBar Labs' },
+      mainEntityOfPage: canonical.href,
+      keywords: tags.join(', ')
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'ShunyaBar Labs',
+      url: new URL(withBase('/'), Astro.site).href,
+      description
+    };
+---
+
+<!doctype html>
+<html lang="en" id="top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Sethurathienam Iyer" />
+    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e2633" media="(prefers-color-scheme: dark)" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="alternate" type="application/rss+xml" title="ShunyaBar Labs writing" href={withBase('/rss.xml')} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    <meta property="og:type" content={pageType} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ShunyaBar Labs" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <title>{pageTitle}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('sb-theme');
+          const theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {}
+      })();
+    </script>
+    <script is:inline async defer src="https://beampipe.io/js/tracker.js" data-beampipe-domain="sethuiyer.github.io"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader currentPath={currentPath} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+    <SearchDialog />
+  </body>
+</html>

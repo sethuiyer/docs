@@ -1,0 +1,90 @@
+---
+import { primaryNavigation } from '../data/navigation';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href={withBase('/')} aria-label="ShunyaBar Labs home">
+      <svg class="wordmark-mark" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="15.5"></circle>
+        <path d="M10 18h16M18 10v16"></path>
+        <circle cx="18" cy="18" r="3.25"></circle>
+      </svg>
+      <span>
+        <strong>ShunyaBar</strong>
+        <small>Labs</small>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary navigation">
+      {
+        primaryNavigation.map((item) => (
+          <a
+            href={withBase(item.path)}
+            aria-current={currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path))
+              ? 'page'
+              : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button search-trigger" type="button" data-search-open aria-label="Search this site">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+        <span>Search</span>
+        <kbd>⌘ K</kbd>
+      </button>
+
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 15.25A8.5 8.5 0 0 1 8.75 3.5 8.5 8.5 0 1 0 20.5 15.25Z"></path>
+        </svg>
+      </button>
+
+      <details class="mobile-menu">
+        <summary class="icon-button" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          {primaryNavigation.map((item) => <a href={withBase(item.path)}>{item.label}</a>)}
+          <a href={withBase('/core-vision/')}>Core vision</a>
+          <a href={withBase('/navokoj/')}>API guide</a>
+          <a href={withBase('/zenodo/')}>Publications</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setTheme(theme: 'light' | 'dark') {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem('sb-theme', theme);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+  });
+</script>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { metaFromEntry, sortBlogEntries } from '../../../lib/content';
+import { withBase } from '../../../lib/paths';
+
+export async function getStaticPaths() {
+  const tagSlug = (tag: string) => tag.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const entries = await getCollection('docs');
+  const tags = new Map<string, string>();
+  for (const entry of entries.filter((item) => item.id.startsWith('blog/'))) {
+    for (const tag of metaFromEntry(entry).blog?.tags ?? []) tags.set(tagSlug(tag), tags.get(tagSlug(tag)) ?? tag);
+  }
+  return [...tags].map(([slug, tag]) => ({ params: { tag: slug }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const entries = await getCollection('docs');
+const tagSlug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const posts = sortBlogEntries(entries).filter((entry) => metaFromEntry(entry).blog?.tags.some((value) => tagSlug(value) === tagSlug(tag)));
+---
+
+<BaseLayout
+  title={`${tag} writing`}
+  description={`ShunyaBar Labs essays and field notes filed under ${tag}.`}
+  currentPath="/blog/"
+>
+  <header class="tag-hero">
+    <a href={withBase('/blog/')}>← All writing</a>
+    <span>Topic</span>
+    <h1>{tag}</h1>
+    <p>{posts.length} {posts.length === 1 ? 'note' : 'notes'} from the field guide.</p>
+  </header>
+  <section class="archive-list compact-archive">
+    {posts.map((entry, index) => <BlogCard {entry} {index} />)}
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { metaFromEntry, sortBlogEntries } from '../../lib/content';
+import { withBase } from '../../lib/paths';
+
+const entries = await getCollection('docs');
+const posts = sortBlogEntries(entries);
+const tags = [...new Map(
+  posts
+    .flatMap((post) => metaFromEntry(post).blog?.tags ?? [])
+    .map((tag) => [tag.toLowerCase().replace(/[^a-z0-9]+/g, '-'), tag])
+)].map(([, tag]) => tag);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays, field notes, technical reports, and product writing from ShunyaBar Labs."
+  currentPath="/blog/"
+>
+  <header class="archive-hero">
+    <div>
+      <span class="archive-kicker">Writing / Field notes</span>
+      <h1>Ideas are useful<br />when they leave a trace.</h1>
+    </div>
+    <div class="archive-intro">
+      <p>
+        Essays and working notes on arithmetic geometry, constraint intelligence, computational physics,
+        and the systems required to make the theory useful.
+      </p>
+      <a href={withBase('/rss.xml')}>Follow via RSS <span>↗</span></a>
+    </div>
+  </header>
+
+  <div class="archive-filter" aria-label="Topics">
+    <span>Browse by idea</span>
+    <div>
+      {tags.map((tag) => <a href={withBase(`/blog/tags/${tag.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`)}>{tag}</a>)}
+    </div>
+  </div>
+
+  <section class="archive-list" aria-label="All writing">
+    {posts.map((entry, index) => <BlogCard {entry} featured={index === 0} {index} />)}
+  </section>
+</BaseLayout>

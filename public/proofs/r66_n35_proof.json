@@ -1,0 +1,11 @@
+{
+  "vertices": 35,
+  "variables": 595,
+  "clauses": 3246320,
+  "subsets_processed": 1623160,
+  "satisfiable": true,
+  "satisfaction_rate": 1.0,
+  "solve_time": 1470.3869931697845,
+  "kernel_time": 0.0,
+  "gen_time": 12.546926736831665
+}
