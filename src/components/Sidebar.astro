@@ -1,5 +1,6 @@
 ---
-import { navigation } from '../data/navigation';
+import { getCollection } from 'astro:content';
+import { navigation, researchNavigation } from '../data/navigation';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -7,12 +8,13 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
+const noteCount = (await getCollection('docs')).length;
 ---
 
 <nav class="side-navigation" aria-label="All sections">
   <div class="side-navigation-title">
     <span>Field guide</span>
-    <small>77 notes</small>
+    <small>{noteCount} notes</small>
   </div>
   {
     navigation.map((group) => (
@@ -28,4 +30,23 @@ const { currentPath } = Astro.props;
       </details>
     ))
   }
+  <details class="external-research-navigation">
+    <summary>Research site <span aria-hidden="true">↗</span></summary>
+    <p>
+      Long-form research at research.shunyabar.foo. Every article below opens in a new tab.
+    </p>
+    <div>
+      {researchNavigation.map((item) => (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${item.label} (opens in a new tab)`}
+        >
+          <span>{item.label}</span>
+          <span class="external-link-mark" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </details>
 </nav>

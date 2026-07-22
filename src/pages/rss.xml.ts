@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { metaFromEntry, sortBlogEntries } from '../lib/content';
+import { editorialFormats } from '../data/blog';
 import { withBase } from '../lib/paths';
 
 export async function GET(context: { site?: URL }) {
@@ -18,7 +19,10 @@ export async function GET(context: { site?: URL }) {
         description: meta.description,
         pubDate: new Date(`${meta.blog!.publishedAt}T00:00:00Z`),
         link: withBase(meta.path),
-        categories: meta.blog!.tags
+        categories: [
+          editorialFormats.find((format) => format.id === meta.blog!.format)?.label ?? meta.blog!.format,
+          ...meta.blog!.tags
+        ]
       };
     }),
     customData: '<language>en-us</language>'

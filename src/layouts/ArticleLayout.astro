@@ -26,6 +26,7 @@ interface Props {
   headings: MarkdownHeading[];
   publishedAt?: string;
   articleType?: string;
+  articleFormat?: string;
   tags?: string[];
   author?: string;
   materials?: MaterialLink[];
@@ -43,6 +44,7 @@ const {
   headings,
   publishedAt,
   articleType,
+  articleFormat,
   tags = [],
   author,
   materials = [],
@@ -73,6 +75,7 @@ const {
         </div>
         <div class="article-facts">
           {draft && <span class="draft-badge">Draft</span>}
+          {articleFormat && <span>{articleFormat}</span>}
           {articleType && <span>{articleType}</span>}
           {publishedAt && <time datetime={publishedAt}>{formatDate(publishedAt)}</time>}
           <span>{readingMinutes} min read</span>

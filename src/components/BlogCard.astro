@@ -1,6 +1,7 @@
 ---
 import type { DocEntry } from '../lib/content';
 import { formatDate, metaFromEntry } from '../lib/content';
+import { editorialFormats } from '../data/blog';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 const { entry, featured = false, index = 0 } = Astro.props;
 const meta = metaFromEntry(entry);
+const editorialFormat = editorialFormats.find((format) => format.id === meta.blog?.format);
 ---
 
 <article class:list={['blog-card', { 'blog-card-featured': featured }]}>
@@ -32,6 +34,7 @@ const meta = metaFromEntry(entry);
     </div>
     <div class="blog-card-copy">
       <div class="blog-card-meta">
+        <span>{editorialFormat?.shortLabel}</span>
         <span>{meta.blog?.type}</span>
         <time datetime={meta.blog?.publishedAt}>{formatDate(meta.blog!.publishedAt)}</time>
         <span>{meta.readingMinutes} min</span>

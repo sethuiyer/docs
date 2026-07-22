@@ -1,5 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
-import { blogDetails } from '../data/blog';
+import { blogDetails, editorialFormatById } from '../data/blog';
 import { routeFromId, withBase } from './paths';
 
 export type DocEntry = CollectionEntry<'docs'>;
@@ -37,7 +37,8 @@ function fallbackBlogDetails(entry: DocEntry) {
   const publishedAt = typeof data.date === 'string' ? data.date : '2026-01-01';
   const type = typeof data.type === 'string' ? data.type : tags.includes('research') ? 'Research note' : 'Field note';
   const description = typeof data.description === 'string' ? data.description : descriptionFromEntry(entry);
-  return { publishedAt, type, tags, description };
+  const format = editorialFormatById[entry.id] ?? 'product-explainer';
+  return { publishedAt, type, format, tags, description };
 }
 
 const sectionLabels: Record<string, string> = {

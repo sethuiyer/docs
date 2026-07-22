@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import ArticleLayout from '../layouts/ArticleLayout.astro';
 import { orderedPages } from '../data/navigation';
 import { headingsFromEntry, metaFromEntry, sortBlogEntries } from '../lib/content';
+import { editorialFormats } from '../data/blog';
 import { routeFromId, slugFromRoute } from '../lib/paths';
 
 export async function getStaticPaths() {
@@ -26,6 +27,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const headings = headingsFromEntry(entry);
 const meta = metaFromEntry(entry);
+const editorialFormat = editorialFormats.find((format) => format.id === meta.blog?.format);
 const allEntries = await getCollection('docs');
 let previous: { label: string; path: string } | undefined;
 let next: { label: string; path: string } | undefined;
@@ -58,6 +60,7 @@ if (meta.blog) {
   {headings}
   publishedAt={meta.blog?.publishedAt}
   articleType={meta.blog?.type}
+  articleFormat={editorialFormat?.label}
   tags={meta.blog?.tags}
   author={meta.author}
   materials={meta.materials}

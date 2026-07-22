@@ -13,6 +13,7 @@ export const GET: APIRoute = async () => {
           title: meta.title,
           url: withBase(meta.path),
           category: meta.blog!.type,
+          format: meta.blog!.format,
           date: meta.blog!.publishedAt
         };
       })

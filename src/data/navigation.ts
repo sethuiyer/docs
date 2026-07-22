@@ -8,6 +8,32 @@ export interface NavGroup {
   items: NavItem[];
 }
 
+export interface ExternalNavItem {
+  label: string;
+  href: string;
+}
+
+export const researchNavigation: ExternalNavItem[] = [
+  { label: 'Unified Research Abstract', href: 'https://research.shunyabar.foo/posts/abstract.html' },
+  { label: 'Research Contributions', href: 'https://research.shunyabar.foo/posts/research.html' },
+  { label: 'Convergence Frontiers', href: 'https://research.shunyabar.foo/posts/convergence-frontiers.html' },
+  { label: 'The ShunyaBar Functional', href: 'https://research.shunyabar.foo/posts/unified_functional.html' },
+  { label: 'The Self-Stabilizing Optimizer', href: 'https://research.shunyabar.foo/posts/self-stabilizing-optimizer.html' },
+  { label: 'Mathematical Mechanism', href: 'https://research.shunyabar.foo/posts/mathematical-mechanism.html' },
+  { label: 'TSP Implementation Plan', href: 'https://research.shunyabar.foo/posts/tsp-mechanism.html' },
+  { label: 'The Hidden Laws of Imbalance', href: 'https://research.shunyabar.foo/posts/hidden-laws-of-imbalance.html' },
+  { label: 'The Multiplicative Constraint Axis', href: 'https://research.shunyabar.foo/posts/multiplicative-constraint-axis.html' },
+  { label: 'Multiplicative Navier–Stokes', href: 'https://research.shunyabar.foo/posts/multiplicative-navier-stokes.html' },
+  { label: 'Proximity–Identity Equilibrium', href: 'https://research.shunyabar.foo/posts/proximity-identity-equilibrium.html' },
+  { label: 'The Dynamic Prime Cantor Set', href: 'https://research.shunyabar.foo/posts/dynamic-prime-cantor-set.html' },
+  { label: 'The Prime Walk', href: 'https://research.shunyabar.foo/posts/prime-walk-jahn-teller.html' },
+  { label: 'Exponential Functions in Complex Systems', href: 'https://research.shunyabar.foo/posts/fingerprint-of-complexity.html' },
+  { label: 'ShunyaBar Phase Transition', href: 'https://research.shunyabar.foo/posts/shunya-bar-phase-transition.html' },
+  { label: 'Fock Space Computation', href: 'https://research.shunyabar.foo/posts/fock-space-computation.html' },
+  { label: 'The Quantum Rhythm Hypothesis', href: 'https://research.shunyabar.foo/posts/quantum-rhythm-hypothesis.html' },
+  { label: 'Majorana Topological Superconductors', href: 'https://research.shunyabar.foo/posts/majorana-topological-superconductors.html' }
+];
+
 export const navigation: NavGroup[] = [
   {
     label: 'Start here',

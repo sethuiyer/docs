@@ -3,7 +3,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const output = resolve(root, '../docs');
+const output = resolve(root, 'dist');
 const contentDirectories = ['blog', 'concepts', 'getting-started', 'marketing', 'navokoj', 'projects', 'references', 'zenodo'];
 
 function filesBelow(directory, extension) {
@@ -41,7 +41,7 @@ const assert = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-assert(markdownFiles.length === 77, `Expected 77 Markdown sources, found ${markdownFiles.length}`);
+assert(markdownFiles.length === 78, `Expected 78 Markdown sources, found ${markdownFiles.length}`);
 
 for (const source of markdownFiles) {
   const route = routeForMarkdown(source);

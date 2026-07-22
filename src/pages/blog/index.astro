@@ -2,16 +2,102 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import { editorialFormats } from '../../data/blog';
 import { metaFromEntry, sortBlogEntries } from '../../lib/content';
 import { withBase } from '../../lib/paths';
 
 const entries = await getCollection('docs');
 const posts = sortBlogEntries(entries);
+const formatGroups = editorialFormats
+  .map((format) => ({
+    format,
+    posts: posts.filter((post) => metaFromEntry(post).blog?.format === format.id)
+  }))
+  .filter((group) => group.posts.length > 0);
 const tags = [...new Map(
   posts
     .flatMap((post) => metaFromEntry(post).blog?.tags ?? [])
     .map((tag) => [tag.toLowerCase().replace(/[^a-z0-9]+/g, '-'), tag])
 )].map(([, tag]) => tag);
+
+const postLink = (id: string, note: string) => {
+  const entry = posts.find((post) => post.id === id);
+  if (!entry) throw new Error(`Unknown reading-journey post: ${id}`);
+  const meta = metaFromEntry(entry);
+  return { label: meta.title, href: withBase(meta.path), note, external: false };
+};
+
+const readingJourney = [
+  {
+    id: 'discover',
+    label: 'Discover',
+    prompt: 'What is this?',
+    description: 'Enter through a working product, a physical intuition, or an open implementation.',
+    items: [
+      { label: 'Navokoj — Constraint Intelligence Runtime', href: 'https://navokoj.shunyabar.foo/', note: 'The operational surface: model + deadline → actionable decision.', external: true },
+      { label: 'Casimir SAT Solver', href: 'https://sethuiyer.github.io/casimir-sat-solver/', note: 'Boolean logic treated as interacting physical states.', external: true },
+      { label: 'NitroSAT', href: 'https://sethuiyer.github.io/NitroSAT/', note: 'The open-source SAT and MaxSAT implementation.', external: true },
+      { label: 'BAHA — Branch-Aware Optimization', href: 'https://sethuiyer.github.io/baha/', note: 'Lambert-W branches as structured escape routes.', external: true },
+      { label: 'Documentation Hub', href: withBase('/'), note: 'The navigable spine of the ecosystem.', external: false }
+    ]
+  },
+  {
+    id: 'understand',
+    label: 'Understand',
+    prompt: 'How does it become useful?',
+    description: 'Follow the path from solver research to a runtime that applications and organizations can operate.',
+    items: [
+      { label: 'Navokoj API Documentation', href: 'https://navokoj.shunyabar.foo/docs', note: 'Requests, responses, engines, limits, and integration contracts.', external: true },
+      postLink('blog/road-to-enterprise', 'The evolution into a routed, billed, deployable runtime.'),
+      postLink('blog/building-a-constraint-runtime', 'The complete constrained-decision lifecycle.'),
+      postLink('blog/from-nitrosat-to-navokoj', 'Where open research ends and the operated runtime begins.'),
+      postLink('blog/what-happens-when-a-solve-times-out', 'The meaning of solved, feasible, partial, timeout, and error.'),
+      postLink('blog/navokoj-pricing-explained', 'Plans, workloads, and hardware economics.')
+    ]
+  },
+  {
+    id: 'observe',
+    label: 'Observe',
+    prompt: 'What does it do concretely?',
+    description: 'Follow the experimental and engineering pieces that readers use to evaluate behavior, boundaries, and scale.',
+    items: [
+      postLink('blog/shipped-api-verification', 'API behavior across edge cases and scaling regimes.'),
+      postLink('blog/ramsey-limit', 'Satisfiable, critical, and frustrated regimes.'),
+      postLink('blog/k8s-placement', 'Global placement reasoning at multimillion-clause scale.'),
+      postLink('blog/the-future-of-sure-thing-computing', 'The resilience-computing and best-effort decision thesis.'),
+      postLink('blog/qbf-solving', 'Continuous optimization beyond ordinary SAT.'),
+      { label: 'Navokoj Evidence', href: 'https://navokoj.shunyabar.foo/evidence', note: 'Benchmark campaigns, artifacts, and integrity records.', external: true }
+    ]
+  },
+  {
+    id: 'investigate',
+    label: 'Investigate',
+    prompt: 'What mechanisms are underneath?',
+    description: 'Move from application behavior into continuous geometry, multiplicative structure, dynamics, and stopping.',
+    items: [
+      { label: 'Multiplicative PINN Framework', href: 'https://sethuiyer.github.io/multiplicative-pinn-framework/', note: 'Multiplicative constraint enforcement beyond SAT.', external: true },
+      { label: 'STOP Operator Manuscript', href: withBase('/concepts/stop-operator-manuscript/'), note: 'A mathematical theory of when computation should stop.', external: false },
+      postLink('blog/multiplicative-archaeology', 'Numbers as compressed histories of interaction.'),
+      postLink('blog/physics-engine-for-logic', 'Discrete logic as evolution through an energy landscape.'),
+      postLink('blog/training-dynamics', 'Constraint flow through the lens of neural training dynamics.'),
+      postLink('blog/six-research-tribes', 'Six research functions composing into one pipeline.')
+    ]
+  },
+  {
+    id: 'research',
+    label: 'Research',
+    prompt: 'Why does the architecture recur?',
+    description: 'Enter the foundational program: arithmetic identity, geometric motion, and thermodynamic transition.',
+    items: [
+      postLink('blog/enter-the-research-program', 'The institutional thesis and guided entrance.'),
+      { label: 'Unified Research Abstract', href: 'https://research.shunyabar.foo/posts/abstract.html', note: 'Sixteen frameworks, one program.', external: true },
+      { label: 'Mathematical Mechanism', href: 'https://research.shunyabar.foo/posts/mathematical-mechanism.html', note: 'The self-stabilizing optimizer in compact form.', external: true },
+      { label: 'The ShunyaBar Functional', href: 'https://research.shunyabar.foo/posts/unified_functional.html', note: 'The arithmetic–geometric action principle.', external: true },
+      { label: 'Phase Transition and Symmetry Breaking', href: 'https://research.shunyabar.foo/posts/shunya-bar-phase-transition.html', note: 'The quantum-statistical foundation.', external: true },
+      { label: 'All long-form research', href: 'https://research.shunyabar.foo/', note: 'Continue through the complete research corpus.', external: true }
+    ]
+  }
+];
 ---
 
 <BaseLayout
@@ -33,14 +119,105 @@ const tags = [...new Map(
     </div>
   </header>
 
-  <div class="archive-filter" aria-label="Topics">
-    <span>Browse by idea</span>
-    <div>
-      {tags.map((tag) => <a href={withBase(`/blog/tags/${tag.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`)}>{tag}</a>)}
-    </div>
-  </div>
+  <nav class="writing-view-nav" aria-label="Ways to explore the writing">
+    <a href="#journey"><span>01</span><strong>Follow the journey</strong><small>Recommended path</small></a>
+    <a href="#formats"><span>02</span><strong>Browse by format</strong><small>Complete library</small></a>
+    <a href="#topics"><span>03</span><strong>Browse by topic</strong><small>Find an idea</small></a>
+  </nav>
 
-  <section class="archive-list" aria-label="All writing">
-    {posts.map((entry, index) => <BlogCard {entry} featured={index === 0} {index} />)}
+  <section class="reading-journey" id="journey" aria-labelledby="journey-title">
+    <header class="archive-section-intro">
+      <span>Reader path / 01</span>
+      <div>
+        <h2 id="journey-title">Follow curiosity<br />down the stack.</h2>
+        <p>Begin with intuition and utility. Continue only as far as the question keeps pulling you.</p>
+      </div>
+    </header>
+    <div class="journey-stages">
+      {readingJourney.map((stage, stageIndex) => (
+        <section class="journey-stage" id={stage.id}>
+          <header>
+            <span>{String(stageIndex + 1).padStart(2, '0')}</span>
+            <div>
+              <small>{stage.prompt}</small>
+              <h3>{stage.label}</h3>
+              <p>{stage.description}</p>
+            </div>
+          </header>
+          <div class="journey-links">
+            {stage.items.map((item) => (
+              <a
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                aria-label={item.external ? `${item.label} (opens in a new tab)` : undefined}
+              >
+                <span>
+                  <strong>{item.label}</strong>
+                  <small>{item.note}</small>
+                </span>
+                <b aria-hidden="true">{item.external ? '↗' : '→'}</b>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="format-library" id="formats" aria-labelledby="formats-title">
+    <header class="archive-section-intro">
+      <span>Complete library / 02</span>
+      <div>
+        <h2 id="formats-title">Browse by format.</h2>
+        <p>Every article, grouped by what kind of reading experience it provides.</p>
+      </div>
+    </header>
+    <nav class="editorial-format-nav" aria-label="Writing formats">
+    {formatGroups.map(({ format, posts: formatPosts }, index) => (
+      <a href={`#${format.id}`}>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <strong>{format.label}</strong>
+        <small>{formatPosts.length} {formatPosts.length === 1 ? 'article' : 'articles'}</small>
+      </a>
+    ))}
+    </nav>
+
+    <div class="editorial-sections">
+    {formatGroups.map(({ format, posts: formatPosts }, sectionIndex) => (
+      <section class="editorial-section" id={format.id} aria-labelledby={`${format.id}-title`}>
+        <header class="editorial-section-heading">
+          <span>{String(sectionIndex + 1).padStart(2, '0')}</span>
+          <div>
+            <h2 id={`${format.id}-title`}>{format.label}</h2>
+            <p>{format.description}</p>
+          </div>
+          <small>{formatPosts.length} {formatPosts.length === 1 ? 'article' : 'articles'}</small>
+        </header>
+        <div class="archive-list">
+          {formatPosts.map((entry) => {
+            const index = posts.findIndex((post) => post.id === entry.id);
+            return <BlogCard {entry} featured={index === 0} {index} />;
+          })}
+        </div>
+      </section>
+    ))}
+    </div>
+  </section>
+
+  <section class="topic-library" id="topics" aria-labelledby="topics-title">
+    <header class="archive-section-intro">
+      <span>Idea index / 03</span>
+      <div>
+        <h2 id="topics-title">Browse by topic.</h2>
+        <p>Jump directly to the mathematical, computational, or product idea you already care about.</p>
+      </div>
+    </header>
+    <div class="archive-filter" aria-label="Topics">
+      <span>All topics</span>
+      <div>
+        {tags.map((tag) => <a href={withBase(`/blog/tags/${tag.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`)}>{tag}</a>)}
+      </div>
+    </div>
   </section>
 </BaseLayout>
