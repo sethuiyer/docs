@@ -68,7 +68,8 @@ export const navigation: NavGroup[] = [
       { label: 'Riemann Hypothesis', path: '/concepts/riemann-hypothesis/' },
       { label: 'Asymptotically Fair Stopping', path: '/concepts/asymptotically-fair-stopping/' },
       { label: 'STOP Operators', path: '/concepts/stop-operator-manuscript/' },
-      { label: 'Resolution STOP', path: '/concepts/resolution-stop/' }
+      { label: 'Resolution STOP', path: '/concepts/resolution-stop/' },
+      { label: 'Regular-Growth Identification', path: '/concepts/regular-growth-identification/' }
     ]
   },
   {
