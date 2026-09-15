@@ -67,7 +67,8 @@ export const navigation: NavGroup[] = [
       { label: 'Phase Transitions', path: '/concepts/phase-transitions/' },
       { label: 'Riemann Hypothesis', path: '/concepts/riemann-hypothesis/' },
       { label: 'Asymptotically Fair Stopping', path: '/concepts/asymptotically-fair-stopping/' },
-      { label: 'STOP Operators', path: '/concepts/stop-operator-manuscript/' }
+      { label: 'STOP Operators', path: '/concepts/stop-operator-manuscript/' },
+      { label: 'Resolution STOP', path: '/concepts/resolution-stop/' }
     ]
   },
   {

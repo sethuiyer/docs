@@ -1873,6 +1873,91 @@ That decomposition is the candidate contribution. The deeper research question i
 
 The path to publication is to formalize admissible observer classes, define equivalence of observer scales, prove universality and anomaly theorems for controlled path families, and situate the framework precisely within existing summability, spectral, probability, and renormalization-adjacent mathematics.
 
+## 19. Note: Resolution STOP on Discovery Trees
+
+*Added after the main draft. This section records a connective result between this manuscript and the lab's two companion programmes on quotients and completions. It is elementary and is labelled as such.*
+
+### 19.1 The substitution
+
+Everything above stops in **time**: \(\tau\) is a random horizon on the path index \(k\). The companion construction — the ordered-discovery completion — is indexed by **resolution depth** \(j\) rather than by elapsed steps. The natural question is whether the STOP operator survives the substitution \(k \to j\). It does, and it produces a theorem that couples the two frameworks.
+
+Let \(X_j\) be the set of resolution-\(j\) discovery profiles (equivalently, finite histories quotiented by agreement of their discovery word at resolution \(j\)), and write \(c_j = |X_j|\). Let \(1-q\) be the observer's survival probability **per resolution level**. Define the **resolution-STOP observable**
+
+\[
+O_q \;=\; \sum_{j\ge 0} c_j\,(1-q)^{j}.
+\]
+
+This is the ordinary generating function of the level counts, so its singularities are governed by the growth rate of the discovery tree — which is precisely what fixes the geometry of its boundary.
+
+### 19.2 Exponential growth: the critical survival probability
+
+Suppose the tree branches at rate \(b\), so \(c_j \sim b^{\,j}\). Under the visual metric \(d = 2^{-r}\) on the boundary,
+
+\[
+\dim(\partial T_{\mathrm{nov}}) \;=\; \lim_{j\to\infty} \frac{\log c_j}{\log 2^{j}} \;=\; \log_2 b .
+\]
+
+The resolution-STOP sum is geometric, \(O_q = \sum_j (b(1-q))^{j}\), and converges iff \(b(1-q) < 1\). Therefore
+
+\[
+\boxed{\;q_c \;=\; 1-\frac{1}{b} \;=\; 1-2^{-\dim(\partial T_{\mathrm{nov}})}.\;}
+\]
+
+**The critical survival probability of a geometric observer is determined by the dimension of the boundary.** For \(q > q_c\) the resolution-STOP value is finite; at and below \(q_c\) it diverges. Numerical check:
+
+| \(b\) | \(\dim = \log_2 b\) | \(q_c = 1-1/b\) | \(O_q\) at \(q_c-0.02\) | at \(q_c+0.02\) |
+|---:|---:|---:|---:|---:|
+| 2 | 1.000 | 0.5000 | divergent | 25 |
+| 3 | 1.585 | 0.6667 | divergent | 16.67 |
+| 4 | 2.000 | 0.7500 | divergent | 12.5 |
+| 8 | 3.000 | 0.8750 | divergent | 6.25 |
+
+### 19.3 Polynomial growth: this manuscript's residue theorem as a special case
+
+Suppose instead \(c_j \sim (j+1)^m\). Then resolution-STOP is exactly the object of Theorem 7.2, with the resolution index playing the role of the time index:
+
+\[
+\operatorname{FP}_{t\to 0}\sum_{k\ge 1} k^{m} e^{-t(k-1)} \;=\; \zeta(-m) + \frac{1}{m+1}.
+\]
+
+Verified symbolically for \(m = 0,\dots,6\):
+
+| \(m\) | finite part | \(\zeta(-m)+\frac{1}{m+1}\) |
+|---:|---|---|
+| 0 | \(1/2\) | \(1/2\) |
+| 1 | \(5/12\) | \(5/12\) |
+| 2 | \(1/3\) | \(1/3\) |
+| 3 | \(31/120\) | \(31/120\) |
+| 4 | \(1/5\) | \(1/5\) |
+| 5 | \(41/252\) | \(41/252\) |
+| 6 | \(1/7\) | \(1/7\) |
+
+So Theorem 7.2 is the **sub-exponential case** of resolution-STOP: polynomial level growth yields a zeta residue, exponential level growth yields a dimension pole.
+
+### 19.4 The connective statement
+
+\[
+\boxed{\;\text{resolution-STOP residue} \;=\; \text{singularity of the level generating function} \;=\; \text{growth rate of the discovery tree}.\;}
+\]
+
+The chain across the three programmes is then:
+
+| Step | Object | Operation |
+|---|---|---|
+| 1 | \(X_j\), the resolution-\(j\) profiles | quotient of histories (refining \(j\) is monotone coarsening) |
+| 2 | \(\varprojlim_j X_j\), the discovery tree and its boundary | completion — inverse limit and hyperbolic boundary |
+| 3 | \(O_q = \sum_j |X_j|(1-q)^j\) | observer — rescaled at resolution depth |
+
+### 19.5 Status
+
+**Standard, used and not claimed as new.** Geometric series and radius of convergence; box-counting dimension and the visual metric on a tree boundary; Pringsheim's theorem (radius of convergence is the reciprocal of the growth rate); Theorem 7.2 itself.
+
+**Stated here.** That resolution depth, not time, is the correct index for a STOP observer on the discovery tree; the resulting critical survival \(q_c = 1-2^{-\dim(\partial T_{\mathrm{nov}})}\); and the identification of Theorem 7.2 as the sub-exponential case of resolution-STOP.
+
+**Not claimed.** No equivalence of categories — no functor is constructed, and none is asserted. No theorem about primes or observer-invariant arithmetic structure. No depth: this is roughly one page of geometric series and box-counting, and the contribution is the *statement of the bridge*, not the arithmetic.
+
+---
+
 ## References to Add
 
 The following references should be added before external submission.
@@ -1896,6 +1981,7 @@ The following references should be added before external submission.
 ## See Also
 
 - [Asymptotically Fair Stopping](asymptotically-fair-stopping.md)
+- [Resolution STOP](resolution-stop.md) — the discovery-tree bridge (Section 19)
 - [Riemann Hypothesis](riemann-hypothesis.md)
 - [Prime Weighting](prime-weighting.md)
 - [Partition Function](partition-function.md)

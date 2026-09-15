@@ -41,7 +41,7 @@ const assert = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-assert(markdownFiles.length === 81, `Expected 81 Markdown sources, found ${markdownFiles.length}`);
+assert(markdownFiles.length === 82, `Expected 82 Markdown sources, found ${markdownFiles.length}`);
 
 for (const source of markdownFiles) {
   const route = routeForMarkdown(source);
