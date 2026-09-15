@@ -12,7 +12,7 @@ The frozen triple identifies
 q_c \;=\; 1-2^{-\dim_B(\partial T_{\mathrm{nov}})} .
 \]
 
-That identity silently equates two growth rates:
+The frozen page already qualifies that identity — *"under regular covering growth"*. This note makes that condition **exact**, and making it exact means separating two growth rates:
 
 - the growth of the **full** resolution-\(j\) quotient count \(n_j := |X_j|\), which is what Cauchy–Hadamard sees, and
 - the growth of the **live** level-\(j\) count — those vertices with a non-empty boundary below them — which is what covering the boundary requires.
@@ -131,16 +131,16 @@ Every pair \((n_j, L_j)\) with \(n_{j+1}\ge L_j\) is realizable by such a tree, 
 
 ## What this does to the frozen triple
 
-Nothing in the frozen triple is withdrawn. What changes is the **status of one identity**, from unconditional to conditional:
+Nothing in the frozen triple is withdrawn, and nothing in it was wrong. The conditional corollary was already stated there in prose ("under regular covering growth"); what changes here is that the condition becomes **exact and checkable**:
 
 | Statement | Status |
 |---|---|
 | \(R = 1/\limsup_j |X_j|^{1/j}\), \(q_c = 1-R\) | unconditional (Cauchy–Hadamard) |
 | \(\dim_B(\partial T) = \limsup_j \log L_j/(j\log 2)\) | unconditional (proved above) |
 | \(q_c \ge 1-2^{-\dim_B(\partial T)}\) | unconditional |
-| \(q_c = 1-2^{-\dim_B(\partial T)}\) | **holds iff dead ends do not asymptotically dominate** — in particular under the finite-profile extension property |
+| \(q_c = 1-2^{-\dim_B(\partial T)}\) | **holds iff** dead ends do not asymptotically dominate — the frozen page's "regular covering growth" made exact — in particular under the finite-profile extension property |
 
-So the honest reading of the frozen formula is: *it is the extension-property case*. Where the tower is realized by actual traversals — so that every compatible block is live — the formula is a theorem. Where the tower is a purely combinatorial inverse system, it is an upper bound on the geometry, and the true geometry is governed by the live count.
+So the honest reading of the frozen formula is: *it is the extension-property case* — already flagged there as "regular covering growth", now stated exactly. Where the tower is realized by actual traversals — so that every compatible block is live — the formula is a theorem. Where the tower is a purely combinatorial inverse system, it is an upper bound on the geometry, and the true geometry is governed by the live count.
 
 ## A sharper canonicity question
 
