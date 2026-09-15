@@ -85,7 +85,8 @@ export const navigation: NavGroup[] = [
       { label: 'Thermodynamic Number Line', path: '/projects/thermodynamic-number-line/' },
       { label: 'Authorization Lattice', path: '/projects/authorization-lattice/' },
       { label: 'Behavioral Quotients', path: '/projects/behavioral-quotients/' },
-      { label: 'FUTCache', path: '/projects/futcache/' }
+      { label: 'FUTCache', path: '/projects/futcache/' },
+      { label: 'Novelty Geometry', path: '/projects/novelty-geometry/' }
     ]
   },
   {

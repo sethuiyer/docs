@@ -26,7 +26,8 @@ THE ARITHMETIC MANIFOLD
 │
 ├── Compression & Quotients
 │   ├── Behavioral Quotients ───────── Quotient design principle
-│   └── FUTCache ───────────────────── Metric visited-set / sufficient state
+│   ├── FUTCache ───────────────────── Metric visited-set / sufficient state
+│   └── Novelty Geometry ───────────── Ordered-novelty completion
 │
 ├── Foundational
 │   ├── Thermodynamic Number Line ──── Primes + Riemann zeta theory
@@ -54,6 +55,7 @@ THE ARITHMETIC MANIFOLD
 | [Authorization Lattice](authorization-lattice.md) | — | Capabilities | p-adic permission composition |
 | [Behavioral Quotients](behavioral-quotients.md) | — | Theory | State reduction as a behavioural quotient |
 | [FUTCache](futcache.md) | C | Compression | Bounded-memory metric visited-set |
+| [Novelty Geometry](novelty-geometry.md) | — | Theory | Resolution-depth ordered-discovery completion |
 
 ---
 
@@ -92,6 +94,7 @@ All projects use \(Z(\beta) = \sum e^{-\beta E(s)}\):
 | 2026 | BAHA | 10.5281/zenodo.18373732 |
 | 2026 | NitroSAT | 10.5281/zenodo.18753235 |
 | 2025 | Multiplicative PINN | 10.5281/zenodo.18214172 |
+| 2026 | Novelty Geometry | 10.5281/zenodo.22058736 |
 
 ---
 
