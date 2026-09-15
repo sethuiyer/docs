@@ -24,6 +24,10 @@ THE ARITHMETIC MANIFOLD
 │   └── Factor Agent ───────────────── Multi-agent architecture
 │       └── Agentic AI Runtime ─────── Distributed systems architecture
 │
+├── Compression & Quotients
+│   ├── Behavioral Quotients ───────── Quotient design principle
+│   └── FUTCache ───────────────────── Metric visited-set / sufficient state
+│
 ├── Foundational
 │   ├── Thermodynamic Number Line ──── Primes + Riemann zeta theory
 │   └── Authorization Lattice ──────── Capability permissions
@@ -48,6 +52,8 @@ THE ARITHMETIC MANIFOLD
 | [Factor Agent](factor-agent.md) | Elixir/OTP | Multi-Agent | Prime factorization architecture |
 | [Thermodynamic Number Line](thermodynamic-number-line.md) | R/Mathematica | Number Theory | Primes as thermodynamic fuel |
 | [Authorization Lattice](authorization-lattice.md) | — | Capabilities | p-adic permission composition |
+| [Behavioral Quotients](behavioral-quotients.md) | — | Theory | State reduction as a behavioural quotient |
+| [FUTCache](futcache.md) | C | Compression | Bounded-memory metric visited-set |
 
 ---
 

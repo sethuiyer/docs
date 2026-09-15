@@ -83,7 +83,9 @@ export const navigation: NavGroup[] = [
       { label: 'Casimir SAT Solver', path: '/projects/casimir-sat-solver/' },
       { label: 'Factor Agent', path: '/projects/factor-agent/' },
       { label: 'Thermodynamic Number Line', path: '/projects/thermodynamic-number-line/' },
-      { label: 'Authorization Lattice', path: '/projects/authorization-lattice/' }
+      { label: 'Authorization Lattice', path: '/projects/authorization-lattice/' },
+      { label: 'Behavioral Quotients', path: '/projects/behavioral-quotients/' },
+      { label: 'FUTCache', path: '/projects/futcache/' }
     ]
   },
   {
