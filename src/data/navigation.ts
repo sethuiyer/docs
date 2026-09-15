@@ -69,7 +69,8 @@ export const navigation: NavGroup[] = [
       { label: 'Asymptotically Fair Stopping', path: '/concepts/asymptotically-fair-stopping/' },
       { label: 'STOP Operators', path: '/concepts/stop-operator-manuscript/' },
       { label: 'Resolution STOP', path: '/concepts/resolution-stop/' },
-      { label: 'Regular-Growth Identification', path: '/concepts/regular-growth-identification/' }
+      { label: 'Regular-Growth Identification', path: '/concepts/regular-growth-identification/' },
+      { label: 'Cofinal Invariance', path: '/concepts/cofinal-invariance/' }
     ]
   },
   {
