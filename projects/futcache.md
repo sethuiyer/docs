@@ -63,13 +63,13 @@ The same quantity can be read as an *observer* rather than a memory budget. Inde
 O_q \;=\; \sum_{j\ge 0} M_j(L)\,(1-q)^{j}.
 \]
 
-The ratio of successive terms is asymptotically \(2^{D}(1-q)\), so the sum converges iff \(2^{D}(1-q) < 1\), giving
+By Cauchy–Hadamard the radius of convergence of the level generating function is \(R = 1/\limsup_j M_j(L)^{1/j}\), and the observer converges iff \(1-q < R\), so in general \(q_c = 1-R\). In the regular regime \(M_j \asymp 2^{jD}\), so \(R = 2^{-D}\) and
 
 \[
 \boxed{\;q_c \;=\; 1-2^{-D} \;=\; 1-2^{-D_{\mathrm{cache}}(L;P)}.\;}
 \]
 
-**The cache dimension is exactly the critical survival probability of a geometric observer indexed by resolution depth.** Above \(q_c\) the observer sees a finite value; at and below it, divergence. Resolution determines memory; memory determines the survival probability below which no finite observation exists.
+**The cache dimension is exactly the critical stopping probability of a geometric observer indexed by resolution depth** — \(q\) being the stopping probability per level and \(1-q\) the continuation probability. Above \(q_c\) the observer sees a finite value; at and below it, divergence. Resolution determines memory; memory determines the stopping probability below which no finite observation exists.
 
 In the Heaps regime \(M_L(N) = N^{\alpha D + o(1)} = N^{\beta+o(1)}\), and if the exponent \(\beta\) is an integer \(m\) the same observer over the *temporal* index has finite part \(\zeta(-m) + \tfrac{1}{m+1}\) — so the index in the zeta residue is the Heaps exponent \(\beta = \alpha D\).
 

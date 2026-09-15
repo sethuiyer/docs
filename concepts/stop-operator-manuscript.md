@@ -1889,21 +1889,37 @@ O_q \;=\; \sum_{j\ge 0} c_j\,(1-q)^{j}.
 
 This is the ordinary generating function of the level counts, so its singularities are governed by the growth rate of the discovery tree — which is precisely what fixes the geometry of its boundary.
 
-### 19.2 Exponential growth: the critical survival probability
+### 19.2 The connective theorem: Cauchy–Hadamard
 
-Suppose the tree branches at rate \(b\), so \(c_j \sim b^{\,j}\). Under the visual metric \(d = 2^{-r}\) on the boundary,
-
-\[
-\dim(\partial T_{\mathrm{nov}}) \;=\; \lim_{j\to\infty} \frac{\log c_j}{\log 2^{j}} \;=\; \log_2 b .
-\]
-
-The resolution-STOP sum is geometric, \(O_q = \sum_j (b(1-q))^{j}\), and converges iff \(b(1-q) < 1\). Therefore
+Let \(c_j = |X_j|\) and \(C(z)=\sum_{j\ge0} c_j z^{j}\). Cauchy–Hadamard gives the radius of convergence
 
 \[
-\boxed{\;q_c \;=\; 1-\frac{1}{b} \;=\; 1-2^{-\dim(\partial T_{\mathrm{nov}})}.\;}
+R \;=\; \frac{1}{\displaystyle\limsup_{j\to\infty} c_j^{1/j}} .
 \]
 
-**The critical survival probability of a geometric observer is determined by the dimension of the boundary.** For \(q > q_c\) the resolution-STOP value is finite; at and below \(q_c\) it diverges. Numerical check:
+Since \(O_q = C(1-q)\), the resolution observer converges iff \(1-q < R\), so in general
+
+\[
+\boxed{\;q_c \;=\; 1-R.\;}
+\]
+
+Here \(q\) is the **stopping probability per resolution level** and \(1-q\) is the survival (continuation) probability; \(q_c\) is therefore the **critical stopping probability**. Because \(b := \limsup_j c_j^{1/j}\) is a \(\limsup\), this statement already covers irregular trees and non-uniform refinement. Only the dimension identity below requires regular covering growth.
+
+### 19.2.1 Regular (exponential) growth
+
+Suppose \(c_j \asymp b^{\,j}\). Under the visual metric \(d = 2^{-r}\) on the boundary,
+
+\[
+\dim_B(\partial T_{\mathrm{nov}}) \;=\; \lim_{j\to\infty} \frac{\log c_j}{j\log 2} \;=\; \log_2 b ,
+\]
+
+so \(R = 1/b = 2^{-\dim_B}\) and
+
+\[
+\boxed{\;q_c \;=\; 1-\frac{1}{b} \;=\; 1-2^{-\dim_B(\partial T_{\mathrm{nov}})}.\;}
+\]
+
+**The critical stopping probability of a geometric observer is determined by the box dimension of the boundary.** For \(q > q_c\) the resolution-STOP value is finite; at and below \(q_c\) it diverges. Equivalently \(\dim_B(\partial T_{\mathrm{nov}}) = -\log_2(1-q_c)\). Numerical check:
 
 | \(b\) | \(\dim = \log_2 b\) | \(q_c = 1-1/b\) | \(O_q\) at \(q_c-0.02\) | at \(q_c+0.02\) |
 |---:|---:|---:|---:|---:|
@@ -1914,7 +1930,7 @@ The resolution-STOP sum is geometric, \(O_q = \sum_j (b(1-q))^{j}\), and converg
 
 ### 19.3 Polynomial growth: this manuscript's residue theorem as a special case
 
-Suppose instead \(c_j \sim (j+1)^m\). Then resolution-STOP is exactly the object of Theorem 7.2, with the resolution index playing the role of the time index:
+Suppose instead \(c_j \sim (j+1)^m\). Then \(\limsup_j c_j^{1/j}=1\), so \(R=1\) and there is **no interior STOP threshold**: \(q_c = 0\). The behaviour as \(q\downarrow0\) still carries information. Resolution-STOP is then exactly the object of Theorem 7.2, with the resolution index playing the role of the time index:
 
 \[
 \operatorname{FP}_{t\to 0}\sum_{k\ge 1} k^{m} e^{-t(k-1)} \;=\; \zeta(-m) + \frac{1}{m+1}.
@@ -1952,7 +1968,7 @@ The chain across the three programmes is then:
 
 **Standard, used and not claimed as new.** Geometric series and radius of convergence; box-counting dimension and the visual metric on a tree boundary; Pringsheim's theorem (radius of convergence is the reciprocal of the growth rate); Theorem 7.2 itself.
 
-**Stated here.** That resolution depth, not time, is the correct index for a STOP observer on the discovery tree; the resulting critical survival \(q_c = 1-2^{-\dim(\partial T_{\mathrm{nov}})}\); and the identification of Theorem 7.2 as the sub-exponential case of resolution-STOP.
+**Stated here.** That resolution depth, not time, is the correct index for a STOP observer on the discovery tree; the general critical stopping probability \(q_c = 1-R\) with \(R\) the radius of convergence of the level generating function; and its geometric corollary \(q_c = 1-2^{-\dim_B(\partial T_{\mathrm{nov}})}\).
 
 **Not claimed.** No equivalence of categories — no functor is constructed, and none is asserted. No theorem about primes or observer-invariant arithmetic structure. No depth: this is roughly one page of geometric series and box-counting, and the contribution is the *statement of the bridge*, not the arithmetic.
 

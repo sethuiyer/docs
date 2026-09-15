@@ -1,81 +1,116 @@
 # Resolution STOP
 
-*The connective result between the quotient, the completion, and the observer.*
+*The connective invariant between the quotient, the completion, and the observer.*
 
-## The question
+## The triple
 
-Three constructions in this lab sit next to each other:
-
-- [The quotient](../core-vision.md) — minimal state is histories modulo future indistinguishability, \(M^* = H/{\sim_W}\).
-- [The completion](../projects/novelty-geometry.md) — the space of those quotients is `N_P(K) = lim←_j (X_j, q_{j+1,j})`, simultaneously a metric completion, an inverse limit, and a hyperbolic boundary.
-- [The observer](stop-operator-manuscript.md) — a path at finite resolution is a survival-weighted observable, \(\mathcal{O}_\tau(S) = \mathbb{E}[S_\tau]\).
-
-Quotient, completion, expectation are **three different operations on related objects**. The natural question is whether a theorem connects them, or whether the shared theme is only thematic.
-
-There is one. It is elementary. This page states it, derives it, and marks its status honestly.
-
-## The construction: STOP over resolution depth instead of time
-
-The STOP operator stops in **time** — a random horizon \(\tau\) on the path index. The discovery tree is indexed by **resolution depth** \(j\). So put the STOP operator on the resolution index.
-
-Let \(X_j\) be the level-\(j\) state space (the set of resolution-\(j\) discovery words; equivalently, histories quotiented by agreement of their discovery word at resolution \(j\)). Write
+Let \(K\) be a space of histories, trajectories, or behavioural traces, equipped with nested finite-resolution indistinguishability relations \(\sim_0,\ \sim_1,\ \sim_2,\dots\), and define the finite-resolution behavioural quotients
 
 \[
-c_j = |X_j|
+X_j \;:=\; K/\!\sim_j .
 \]
 
-for the number of distinct resolution-\(j\) profiles, and let \(1-q\) be the observer's survival probability **per resolution level**. Define the **resolution-STOP observable**
+The bonding maps \(\pi_{j+1,j}:X_{j+1}\to X_j\) forget distinctions visible only at resolution \(j+1\), so
 
 \[
-\boxed{\;O_q \;=\; \sum_{j\ge 0} c_j\,(1-q)^{j}\;}
+X_0 \leftarrow X_1 \leftarrow X_2 \leftarrow \cdots
 \]
 
-\(O_q\) is the ordinary generating function of the level counts. Its singularities are therefore governed by the growth rate of the discovery tree — which is exactly the quantity that determines the boundary geometry.
-
-## Regime A — exponential growth
-
-Suppose the tree branches at rate \(b\):
+is an inverse system. Its completion is
 
 \[
-c_j \;\sim\; b^{\,j}.
+N_P(K) \;:=\; \varprojlim_j X_j ,
 \]
 
-Under the visual metric \(d = 2^{-r}\) on the boundary, the level-\(j\) count and the Hausdorff dimension are related by
+and when the refinement system is represented by its rooted discovery tree \(T_{\mathrm{nov}}\),
 
 \[
-\dim(\partial T_{\text{nov}}) \;=\; \lim_{j\to\infty}\frac{\log c_j}{\log 2^{j}} \;=\; \log_2 b .
+N_P(K) \;\simeq\; \partial T_{\mathrm{nov}} .
 \]
 
-The resolution-STOP sum is geometric:
+The third object places an observer on **resolution depth** rather than chronological time. Write \(c_j := |X_j|\), and let \(q\in(0,1]\) be the **stopping probability per refinement step** — so \(1-q\) is the **survival (continuation) probability**. The resolution-STOP operator is
 
 \[
-O_q \;=\; \sum_j \bigl(b(1-q)\bigr)^{j},
+O_q \;:=\; \sum_{j\ge 0} c_j\,(1-q)^{j} .
 \]
 
-which converges iff \(b(1-q) < 1\). Hence
+In one line:
 
 \[
-\boxed{\;q_c \;=\; 1-\frac{1}{b} \;=\; 1-2^{-\dim(\partial T_{\text{nov}})}\;}
+\boxed{\;\{X_j\} \;\longrightarrow\; \varprojlim_j X_j \;\longrightarrow\; \sum_{j\ge0}|X_j|(1-q)^j \;}
+\qquad\text{i.e.}\qquad
+\boxed{\;\text{Quotient}\to\text{Completion}\to\text{Observer}\;}
 \]
 
-**The critical survival probability of a geometric observer is fixed by the dimension of the boundary.** For \(q > q_c\) the observer's resolution-STOP value is finite; at and below \(q_c\) it diverges.
+The quotient says what is distinguishable at finite resolution; the completion says what is compatible across arbitrary resolution; the observer asks how far resolution can continue before the weighted mass of distinguishable states ceases to be finite.
 
-Numerically:
+## The connective theorem
 
-| \(b\) | \(\dim = \log_2 b\) | \(q_c = 1-1/b\) | \(O_q\) at \(q_c-0.02\) | at \(q_c+0.02\) |
+Define the exponential level-growth rate and the level generating function
+
+\[
+b \;:=\; \limsup_{j\to\infty} c_j^{1/j},
+\qquad
+C(z) \;:=\; \sum_{j\ge 0} c_j z^{j}.
+\]
+
+Cauchy–Hadamard gives radius of convergence \(R = 1/b\). Since \(O_q = C(1-q)\), the operator converges whenever \(1-q < R\). Therefore
+
+\[
+\boxed{\;q_c \;=\; 1-\frac1b\;}\quad (1<b<\infty),
+\qquad\text{and in general}\qquad
+\boxed{\;q_c \;=\; 1-R\;}
+\]
+
+**The STOP transition is not imposed on the refinement tower — it is determined by the asymptotic proliferation of the finite-resolution quotient states.** Note that \(b\) is a \(\limsup\): irregular trees and non-uniform refinement are already covered at this level. The dimension identity below is what needs regular covering growth.
+
+## Boundary dimension
+
+Equip \(\partial T_{\mathrm{nov}}\) with the visual metric \(d(\xi,\eta) = 2^{-r(\xi,\eta)}\), where \(r\) is the depth of the last common ancestor. If \(c_j \asymp b^{j}\), then the boundary is covered by \(c_j\) cylinders of diameter \(2^{-j}\), so
+
+\[
+\dim_B(\partial T_{\mathrm{nov}})
+=\lim_{j\to\infty}\frac{\log c_j}{j\log 2}
+=\log_2 b ,
+\qquad
+b = 2^{\dim_B(\partial T_{\mathrm{nov}})} ,
+\]
+
+and hence
+
+\[
+\boxed{\;q_c \;=\; 1-2^{-\dim_B(\partial T_{\mathrm{nov}})}\;}
+\qquad\Longleftrightarrow\qquad
+\boxed{\;\dim_B(\partial T_{\mathrm{nov}}) \;=\; -\log_2(1-q_c).\;}
+\]
+
+**Resolution-STOP Theorem.** Under exponential level growth and the visual metric \(2^{-r}\), the critical stopping probability of the resolution observer is determined by the box dimension of the discovery-tree boundary. The quotient tower therefore admits two equivalent asymptotic descriptions:
+
+\[
+\text{geometric complexity} \quad\leftrightarrow\quad \text{observer criticality}.
+\]
+
+Numerically (with \(b = 2^{D}\) so \(D = \log_2 b\)):
+
+| \(b\) | \(D=\log_2 b\) | \(q_c = 1-1/b\) | \(O_q\) at \(q_c-0.02\) | at \(q_c+0.02\) |
 |---:|---:|---:|---:|---:|
 | 2 | 1.000 | 0.5000 | divergent | 25 |
 | 3 | 1.585 | 0.6667 | divergent | 16.67 |
 | 4 | 2.000 | 0.7500 | divergent | 12.5 |
 | 8 | 3.000 | 0.8750 | divergent | 6.25 |
 
-## Regime B — polynomial growth
+## Polynomial regime
 
-Suppose instead \(c_j \sim (j+1)^m\). Then the resolution-STOP sum is the exact object of the STOP manuscript's residue theorem, with the resolution index playing the role of the time index:
+Now let the exponential rate collapse: \(\limsup_j c_j^{1/j} = 1\), so \(R=1\) and there is **no interior STOP threshold** — \(q_c = 0\). The behaviour as \(q\downarrow 0\) still carries information. Put \(1-q = e^{-t}\), \(t\downarrow 0\). For polynomial level growth \(c_j = (j+1)^m\),
 
 \[
-\operatorname{FP}_{t\to 0}\sum_{k\ge 1} k^{m} e^{-t(k-1)}
-\;=\; \zeta(-m) + \frac{1}{m+1}.
+O(t) \;=\; \sum_{j\ge 0}(j+1)^m e^{-tj},
+\]
+
+and under the same finite-part convention as the chronological STOP operator,
+
+\[
+\boxed{\;\operatorname{FP}_{t\to0}\sum_{j\ge 0}(j+1)^m e^{-tj} \;=\; \zeta(-m)+\frac{1}{m+1}.\;}
 \]
 
 Verified symbolically for \(m = 0,\dots,6\):
@@ -90,45 +125,70 @@ Verified symbolically for \(m = 0,\dots,6\):
 | 5 | \(41/252\) | \(41/252\) |
 | 6 | \(1/7\) | \(1/7\) |
 
-So the STOP residue theorem is the **sub-exponential case** of resolution-STOP: polynomial growth gives a zeta residue, exponential growth gives a dimension pole.
+So replacing chronological depth by resolution depth **preserves the STOP residue structure**. The two regimes carry different information: exponential growth gives a nontrivial critical stopping probability; polynomial growth has \(q_c = 0\) but a finite-part invariant in its singular expansion.
 
-## The chain
+## Pringsheim
 
-| Step | Object | Operation |
+Because every \(c_j \ge 0\), the generating function \(C(z)=\sum_j c_j z^j\) has non-negative coefficients. When \(R<\infty\), **Pringsheim's theorem** places a singularity at the positive real point \(z=R\). The resolution observer evaluates this same generating function along \(z = 1-q\), so it reaches the first positive singularity exactly when \(1-q = R\). Hence \(q_c = 1-R\): the STOP transition **is** the positive-real singularity of the quotient tower's level generating function, written in observer coordinates.
+
+## The connective chain
+
+| Step | Object | Role |
 |---|---|---|
-| 1 | \(X_j\) — resolution-\(j\) profiles | quotient of histories (and refining \(j\) is monotone coarsening) |
-| 2 | \(N_P(K) = \lim_{\leftarrow j} X_j\) | completion — inverse limit and hyperbolic boundary |
-| 3 | \(O_q = \sum_j \lvert X_j\rvert (1-q)^j\) | observer — rescaled at resolution depth |
+| I. Quotient | \(X_j = K/\!\sim_j\) | the distinctions visible at resolution \(j\) |
+| II. Completion | \(N_P(K)=\varprojlim_j X_j \simeq \partial T_{\mathrm{nov}}\) | states compatible across all resolutions |
+| III. Observer | \(O_q=\sum_j \lvert X_j\rvert(1-q)^j\) | a stopping observer on resolution depth |
 
-The connective statement:
+The singularity of the observer detects the exponential growth of the tower:
 
-> **The resolution-STOP residue is the singularity of the level generating function, i.e. the growth rate of the discovery tree. In the sub-exponential regime it reduces to the zeta residue theorem.**
+\[
+R^{-1} = \limsup_{j\to\infty}|X_j|^{1/j},
+\qquad
+R = 2^{-\dim_B(\partial T_{\mathrm{nov}})},
+\qquad
+q_c = 1-R = 1-2^{-\dim_B(\partial T_{\mathrm{nov}})}.
+\]
 
-## Status — what is and is not claimed
+\[
+\boxed{\;\text{growth of finite quotients}\;\Longleftrightarrow\;\text{dimension of the completion}\;\Longleftrightarrow\;\text{criticality of the observer}\;}
+\]
 
-**Standard (used, not invented):**
+## What is proved — and what is not
 
-- Geometric series and radius of convergence; Abel/geometric summability.
-- Box-counting dimension and the visual metric on a tree boundary.
-- Pringsheim's theorem: the radius of convergence is the reciprocal of the growth rate.
-- The STOP residue theorem \(\mathrm{FP} = \zeta(-m) + \tfrac{1}{m+1}\).
+**Proved here.** A precise relationship between (1) the growth of finite-resolution quotient spaces, (2) the dimension of the associated discovery boundary, and (3) the convergence of a geometrically stopped resolution observer.
 
-**Stated here:**
+**Not established.** No equivalence of categories. No canonical functor among arbitrary quotient systems. No prime invariance. No tower independence.
 
-- That **resolution depth, not time, is the correct index** for a STOP observer on the discovery tree.
-- The resulting critical survival \(q_c = 1 - 2^{-\dim(\partial T_{\text{nov}})}\).
-- The identification of the STOP residue theorem as the sub-exponential case of resolution-STOP.
+In particular, if the completion depends on the chosen refinement tower \(P\), then both \(\dim(\partial T_P)\) and \(q_c(P)\) may depend on \(P\). This is the **canonicity problem**:
 
-**Not claimed:**
+\[
+\boxed{\;q_c(P) \;=\; q_c(P')\;? \;}
+\]
 
-- No equivalence of categories. There is no functor here, and none is asserted.
-- No theorem about primes or observer-invariant arithmetic structure.
-- No depth. This is roughly one page of geometric series and box-counting; the contribution is the *statement of the bridge*, not the arithmetic.
+for admissible towers \(P, P'\) representing the same underlying behavioural system. A positive result would promote \(q_c\) from a tower statistic to an intrinsic invariant. It is open.
+
+## Open regimes
+
+Between exponential and polynomial growth sits real territory. For example \(c_j \sim e^{\sqrt j}\) still has \(\limsup c_j^{1/j}=1\), so \(q_c = 0\) — yet its singular behaviour near \(q=0\) is unlike any polynomial tower. So \(q_c\) captures exponential complexity but not the whole asymptotic geometry, which suggests a hierarchy:
+
+\[
+\text{radius of convergence} \;\to\; \text{singularity type} \;\to\; \text{regularized finite part}.
+\]
+
+The first detects exponential growth; the second distinguishes sub-exponential growth classes; the third may carry information invisible to dimension alone.
+
+## Status
+
+**Standard, used and not claimed as new.** Cauchy–Hadamard; Pringsheim's theorem; box-counting dimension and the visual metric on a tree boundary; the STOP residue identity \(\zeta(-m)+\tfrac{1}{m+1}\).
+
+**Stated here.** That **resolution depth is a legitimate stopping axis**; that the resulting critical stopping probability is \(q_c = 1-R\), with \(R\) the radius of convergence of the level generating function; and the geometric corollary \(q_c = 1-2^{-\dim_B(\partial T_{\mathrm{nov}})}\) under regular covering growth.
+
+**Not claimed.** Depth. This is geometric series plus box-counting; the contribution is the *coordinate change* — applying STOP to refinement depth — not the arithmetic.
 
 ## See also
 
-- [STOP Operator Manuscript](stop-operator-manuscript.md) — the observer framework
+- [STOP Operator Manuscript](stop-operator-manuscript.md) — the observer framework (see §19)
 - [Novelty Geometry](../projects/novelty-geometry.md) — the discovery tree and its boundary
 - [Behavioral Quotients](../projects/behavioral-quotients.md) — the quotient at each resolution
+- [FUTCache](../projects/futcache.md) — the same invariant as a cache dimension
 - [Partition Function](partition-function.md) — the universal mathematical object
-- [Phase Transitions](phase-transitions.md) — critical scales elsewhere in the program
