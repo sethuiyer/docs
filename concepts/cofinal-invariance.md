@@ -173,6 +173,63 @@ s_c^{\text{full}} \ge D .
 
 This is the canonical form of the bridge. The level-indexed \(q_c = 1-R\) is the same content written in coordinates that a reindexing of the tower can move.
 
+## Transient complexity is *not* cofinal-invariant
+
+Write the transient complexity — the gap between the observer's exponent and the geometry's — as
+
+\[
+\Delta s \;=\; s_c^{\text{full}} - s_c^{\text{live}} \;\ge\; 0 .
+\]
+
+**Answer: no. \(\Delta s\) is not invariant under admissible cofinal presentations.**
+
+### Structural constraints
+
+Any realizable discovery tree satisfies:
+
+- \((T_1)\) \(L_j \le n_j\);
+- \((T_2)\) **\(L_j\) is non-decreasing** — every live vertex has at least one live child, and distinct live vertices have distinct parents, so \(v\mapsto\) (a live child of \(v\)) injects \(\mathrm{live}(j)\hookrightarrow\mathrm{live}(j+1)\);
+- \((T_3)\) \(n_{j+1}\ge L_j\).
+
+\((T_2)\) is easy to forget and it rules out the obvious construction (an alternating live count is impossible).
+
+### Counterexample
+
+Take
+
+\[
+L_j = 2^{j}\ \ \forall j,
+\qquad
+n_j = \begin{cases}4^{j}, & j \text{ odd}\\ 2^{j}, & j \text{ even}\end{cases}
+\]
+
+This satisfies \((T_1)\)–\((T_3)\) (checked explicitly), so it is a realizable tree. With \(\varepsilon_j = 2^{-j}\):
+
+| tower | \(s_c^{\text{full}}\) | \(s_c^{\text{live}}\) | \(\Delta s\) |
+|---|---:|---:|---:|
+| \(P\) | 2.000000 | 1.000000 | **1.000000** |
+| \(P' = P_{2j}\) | 1.000000 | 1.000000 | **0.000000** |
+
+Same boundary, same live exponent — \(s_c^{\text{live}}\) is unchanged, exactly as [Cofinal Tower Invariance](#cofinal-tower-invariance) requires — but \(\Delta s\) moves from \(1\) to \(0\).
+
+### Why
+
+\(s_c^{\text{live}}\) is cofinal-invariant because \(L_j\) is a **covering count**: it answers a question about the boundary, and covering numbers are functions of physical scale. \(s_c^{\text{full}}\) is **not**, because \(n_j\) is not a covering count — dead-end vertices cover nothing. So \(n_j\) has no intrinsic scale-function interpretation; it is only a shell-indexed sequence, and a cofinal restriction is free to sample a different subshell of it. \(\Delta s\) is a difference of a scale function and a shell sequence, so it inherits the shell sequence's presentation-dependence.
+
+### When it *is* invariant
+
+If both
+
+\[
+a_j := \frac{\log n_j}{-\log\varepsilon_j},
+\qquad
+b_j := \frac{\log L_j}{-\log\varepsilon_j}
+\]
+
+**converge**, then every cofinal subsequence has the same limits, so \(\Delta s = \lim a_j - \lim b_j\) is invariant. Verified: \(n_j = 3^j, L_j = 2^j\) gives \(\Delta s = 0.584963\) both before and after reindexing. The counterexample above works precisely because both quantities are \(\limsup\)s attained on non-equivalent subshells — the full rate on odd shells, the live rate on even ones.
+
+> **Consequence.** Transient complexity is **not** an invariant of a behavioural system from counts alone. It becomes one under a regular-variation hypothesis on the admissible presentations. This is a strictly weaker situation than the geometry: \(D = s_c^{\text{live}}\) is presentation-independent under cofinality, while \(\Delta s\) is not.
+
 ## Status
 
 | Claim | Status |
@@ -183,7 +240,8 @@ This is the canonical form of the bridge. The level-indexed \(q_c = 1-R\) is the
 | Cofinal Tower Invariance: \(D_P = D_{P'}\) | **proved** under cofinality + common boundary |
 | Canonical STOP exponent \(s_c\), invariant under reindexing | **proved** (generalised Cauchy–Hadamard, root form) |
 | \(s_c^{\text{live}}\le s_c^{\text{full}}\), equality iff no dominant dead ends | **proved** (immediate from \(L_j\le n_j\)) |
-| Canonicity of the **gap** | **open** — reduces to whether the dead-end structure is tower-invariant, which cofinality alone does not force |
+| Canonicity of the **gap** \(\Delta s = s_c^{\text{full}}-s_c^{\text{live}}\) | **refuted** — explicit realizable counterexample: \(\Delta s\) is \(1\) for \(P\) and \(0\) for \(P'=P_{2j}\) |
+| \(\Delta s\) invariant when the two exponents converge (regular variation) | **proved** — a limit is subsequence-invariant |
 
 **Machinery used, not claimed.** Metric scaling of box dimension; dyadic cylinder covering; abscissa of convergence of non-negative Dirichlet-type series; Cauchy–Hadamard.
 
