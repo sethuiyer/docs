@@ -66,6 +66,7 @@ The Arithmetic Manifold is a statement about the *geometry* of constraint system
 ## See Also
 
 - [All Projects](index.md) — project overview
+- [Resolution STOP](../concepts/resolution-stop.md) — the observer bridge added as §7.7
 - [FUTCache](futcache.md) — the runtime implementation of quotienting explored state
 - [Geometry of Conditional Logic](geometry-of-conditional-logic.md) — state minimization in an incremental solver
 - [NitroSAT](nitrosat.md) — the reference solver line

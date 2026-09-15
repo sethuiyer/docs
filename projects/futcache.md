@@ -49,6 +49,34 @@ FUTCache is the **runtime face of the quotient**. The [Arithmetic Manifold](../c
 
 ---
 
+## The cache dimension is a critical scale
+
+FUTCache's formal development contains a geometric cache-growth law: with box dimension \(D\), the level-\(j\) discovery count satisfies
+
+\[
+M_j(L) \;=\; 2^{\,jD+o(j)}, \qquad D = D_{\mathrm{cache}}(L;P).
+\]
+
+The same quantity can be read as an *observer* rather than a memory budget. Index a survival-weighted observer by resolution depth — let \(1-q\) be the probability of continuing to the next resolution level:
+
+\[
+O_q \;=\; \sum_{j\ge 0} M_j(L)\,(1-q)^{j}.
+\]
+
+The ratio of successive terms is asymptotically \(2^{D}(1-q)\), so the sum converges iff \(2^{D}(1-q) < 1\), giving
+
+\[
+\boxed{\;q_c \;=\; 1-2^{-D} \;=\; 1-2^{-D_{\mathrm{cache}}(L;P)}.\;}
+\]
+
+**The cache dimension is exactly the critical survival probability of a geometric observer indexed by resolution depth.** Above \(q_c\) the observer sees a finite value; at and below it, divergence. Resolution determines memory; memory determines the survival probability below which no finite observation exists.
+
+In the Heaps regime \(M_L(N) = N^{\alpha D + o(1)} = N^{\beta+o(1)}\), and if the exponent \(\beta\) is an integer \(m\) the same observer over the *temporal* index has finite part \(\zeta(-m) + \tfrac{1}{m+1}\) — so the index in the zeta residue is the Heaps exponent \(\beta = \alpha D\).
+
+**Status.** Elementary — a geometric series plus the box-counting exponent. The contribution is the identification, not the arithmetic. See [Resolution STOP](../concepts/resolution-stop.md) for the derivation and the numerical tables. This is not an equivalence of categories and asserts nothing about primes.
+
+---
+
 ## See Also
 
 - [All Projects](index.md) — project overview

@@ -57,6 +57,7 @@ Novelty Geometry is the **geometry underneath the quotient**. [Behavioral Quotie
 ## See Also
 
 - [All Projects](index.md) — project overview
+- [Resolution STOP](../concepts/resolution-stop.md) — geometric stopping over resolution depth on this tree
 - [Behavioral Quotients](behavioral-quotients.md) — the quotient these boundaries support
 - [FUTCache](futcache.md) — online novelty decisions under a memory bound
 - [The Arithmetic Manifold](../core-vision.md) — the unified theory
