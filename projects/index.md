@@ -93,7 +93,7 @@ All projects use \(Z(\beta) = \sum e^{-\beta E(s)}\):
 | 2025 | ShunyaBar | 10.5281/zenodo.18096758 |
 | 2026 | BAHA | 10.5281/zenodo.18373732 |
 | 2026 | NitroSAT | 10.5281/zenodo.18753235 |
-| 2025 | Multiplicative PINN | 10.5281/zenodo.18214172 |
+| 2025 | Multiplicative PINN | _no Zenodo record yet — repository only_ |
 | 2026 | Novelty Geometry | 10.5281/zenodo.22058736 |
 
 ---

@@ -12,7 +12,7 @@ All publications are authored by **Sethurathienam Iyer** — [ORCID: 0009-0008-5
 | 2026 | BAHA | [Multiplicative Calculus for Hardness Detection](https://doi.org/10.5281/zenodo.18373732) |
 | 2026 | NitroSAT | [NitroSAT: A Physics-Informed MaxSAT Solver](https://doi.org/10.5281/zenodo.18753235) |
 | 2026 | Emergent Stochasticity | [Emergent Stochasticity from Serialized Concurrency](https://doi.org/10.5281/zenodo.19571762) |
-| 2025 | Multiplicative PINN | [Multiplicative PINN Framework](https://doi.org/10.5281/zenodo.18214172) |
+| 2025 | Multiplicative PINN | [Multiplicative PINN Framework](https://github.com/sethuiyer/multiplicative-pinn-framework) — *no Zenodo record yet; not minted to fill a table* |
 
 ---
 

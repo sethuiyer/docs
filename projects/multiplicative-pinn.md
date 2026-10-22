@@ -210,7 +210,7 @@ This nucleates a "superconducting phase" where constraints propagate without dis
 
 - `multiplicative-pinn-framework/README.md` — Overview
 - `multiplicative-pinn-framework/docs/RESULTS_SUMMARY.md` — Detailed benchmarks
-- DOI: [10.5281/zenodo.18214172](https://doi.org/10.5281/zenodo.18214172)
+- DOI: _none yet_ — the version of record for this project is the repository itself: [github.com/sethuiyer/multiplicative-pinn-framework](https://github.com/sethuiyer/multiplicative-pinn-framework). A Zenodo record will be minted when there is a frozen release worth citing.
 
 ## Connection to Core Vision
 
