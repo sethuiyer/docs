@@ -8,6 +8,8 @@ type: "Announcement"
 materials:
   - label: "SUTRA source"
     href: "https://github.com/sethuiyer/sutra"
+  - label: "Apache-2.0 license"
+    href: "https://github.com/sethuiyer/sutra/blob/main/LICENSE"
   - label: "Aperture"
     href: "https://github.com/YamSln/Aperture"
   - label: "MaxSAT Evaluation 2026"
@@ -20,7 +22,7 @@ Two changes, effective today.
 
 **Navokoj, the hosted runtime, is retired.** The API is closed to new keys. The pricing, deployment, and case-study posts on this blog remain as an archive of what was built, not as product documentation. No further product posts will be added.
 
-**The core solver is public.** SUTRA — *Search Under Time, Recounted, Attested* — is at [github.com/sethuiyer/sutra](https://github.com/sethuiyer/sutra): parser, repair core, certificate checker, checkpoint code, tests, and benchmark harness in one C repository.
+**The core solver is public under Apache-2.0.** SUTRA — *Search Under Time, Recounted, Attested* — is at [github.com/sethuiyer/sutra](https://github.com/sethuiyer/sutra): parser, repair core, certificate checker, checkpoint code, tests, and benchmark harness in one C repository.
 
 The interesting artifact was never the endpoint. It was the solver and the verification discipline around it: the witness was recounted, the infeasibility claim was certified, and the incumbent survived the deadline. A hosted runtime made all three harder to inspect. The source does not.
 
@@ -91,5 +93,8 @@ On parity-structured instances the gap is not marginal: the repository reports `
 - SUTRA: [github.com/sethuiyer/sutra](https://github.com/sethuiyer/sutra)
 - Aperture: [github.com/YamSln/Aperture](https://github.com/YamSln/Aperture)
 - MaxSAT Evaluation 2026: [Zenodo record](https://zenodo.org/records/21358014)
+- License: [Apache-2.0](https://github.com/sethuiyer/sutra/blob/main/LICENSE)
+
+That closes the Navokoj chapter: the service is retired, the solver is open under a standard license, and the claims are checkable.
 
 Corrections, if any, will be appended here rather than silently edited.
