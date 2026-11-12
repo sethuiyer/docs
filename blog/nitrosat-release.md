@@ -1,5 +1,5 @@
 ---
-title: "Introducing NitroSAT: A High-Performance, Physics-Informed MaxSAT Solver Now Available via Navokoj API"
+title: "NitroSAT — Release: Physics-Informed MaxSAT via the Navokoj API"
 description: "ShunyaBar Labs is proud to announce the public release of NitroSAT — a next-generation MaxSAT approximator that achieves exceptional satisfaction rates on massive, real-world constraint problems while maintaining linear scaling in the number of clauses."
 date: "2026-05-11"
 author: "Navokoj Team"

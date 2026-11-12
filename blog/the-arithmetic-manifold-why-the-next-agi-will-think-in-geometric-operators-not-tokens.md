@@ -1,5 +1,5 @@
 ---
-title: "The Arithmetic Manifold: Why the Next AGI Will Think in Geometric Operators, Not Tokens"
+title: "The Arithmetic Manifold: Geometric Operators, Not Tokens"
 description: "Few days before this, I was walking through the huggingface repo of Inclusion AI\u2019s Ling-1T (https://huggingface.co/inclusionAI/Ling-1T)"
 date: "2025-11-10"
 author: "Sethu Iyer"

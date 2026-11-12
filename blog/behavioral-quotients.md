@@ -1,5 +1,5 @@
 ---
-title: "Behavioral Quotients as a Design Principle for Computation: Geometry, Compression, and Commitment"
+title: "Behavioral Quotients: Geometry, Compression, and Commitment"
 description: "State reduction as a quotient of histories by future indistinguishability: one geometric construction across discrete, continuous, and memory regimes, a conditional transfer theorem, externally verified solver implementations, and an explicit research agenda."
 date: "2026-09-15"
 author: "Sethurathienam Iyer"

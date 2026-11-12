@@ -1,5 +1,5 @@
 ---
-title: "NitroSAT: Constraint Satisfaction as Langevin Flow on the Prime-Weighted Hyperbolic Manifold"
+title: "NitroSAT — Essay: Langevin Flow on the Prime-Weighted Manifold"
 description: "Prime weights, spectral gaps, and a connection to the Riemann hypothesis: SAT solving as gradient flow on an inverted Poincaré disk, with strong convexity, Lyapunov stability, and O(M) scaling verified across millions of clauses."
 date: "2026-02-28"
 author: "Sethurathienam Iyer"

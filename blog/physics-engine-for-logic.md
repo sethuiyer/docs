@@ -1,5 +1,5 @@
 ---
-title: "Navokoj: A Physics Engine for Logic | Constraint Intelligence Platform"
+title: "Navokoj: A Physics Engine for Logic"
 description: "Revolutionary Constraint Intelligence Platform that treats Boolean logic as continuous dynamical systems. 347ms median latency vs 45s classical solvers. Physics-inspired optimization for NP-complete problems."
 date: "2025-11-01"
 author: "Navokoj Team"

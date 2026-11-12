@@ -1,5 +1,5 @@
 ---
-title: "This High School Math Problem is a Secret Portal to Deeper Physics"
+title: "This High School Math Problem Is a Secret Portal to Deeper Physics"
 description: "How can something as simple as a few dots spaced evenly on a circle hide profound complexity? We often see patterns in nature \u2014 spirals in a shell, hexagons in a honeycomb \u2014 and sense a d\u2026"
 date: "2025-09-20"
 author: "Sethu Iyer"

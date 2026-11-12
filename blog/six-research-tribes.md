@@ -1,3 +1,12 @@
+---
+title: "The Six Research Tribes of ShunyaBar"
+description: "Six research cohorts compose into one pipeline: weight, transform, satisfy, relax, observe, and coordinate."
+date: "2026-06-22"
+author: "Sethurathienam Iyer"
+tags: ["Research", "Architecture", "ShunyaBar"]
+type: "Field note"
+---
+
 # The Six Research Tribes of ShunyaBar
 
 *The internal architecture: how the projects compose into a unified pipeline*

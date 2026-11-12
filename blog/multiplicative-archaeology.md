@@ -1,6 +1,15 @@
+---
+title: "Multiplicative Archaeology: Recovering Interaction History from Digital Atoms"
+description: "A framework for treating numbers as structured histories, connecting digit topology, interaction cost, and the archaeology of factorization."
+date: "2026-06-23"
+author: "Sethurathienam Iyer"
+tags: ["Arithmetic", "Number theory", "Computation"]
+type: "Essay"
+---
+
 # Multiplicative Archaeology: Recovering Interaction History from Digital Atoms
 
-*Published 2026-06-23 · Essay · 18 min read · Also on [Medium](https://medium.com/@sethuiyer/multiplicative-archaeology-recovering-interaction-history-from-digital-atoms-afb7a8c55af4)*
+*Also on [Medium](https://medium.com/@sethuiyer/multiplicative-archaeology-recovering-interaction-history-from-digital-atoms-afb7a8c55af4)*
 
 ---
 

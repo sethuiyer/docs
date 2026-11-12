@@ -1,5 +1,5 @@
 ---
-title: "The Road to Enterprise (Legacy Report)"
+title: "The Road to Enterprise: Legacy Report (January 2026)"
 description: "An archived January 2026 roadmap for Navokoj. See the current production-runtime report for the latest architecture, pricing, routing, and deployment status."
 date: "2026-01-24"
 author: "Sethurathienam Iyer, CEO, ShunyaBar Labs"

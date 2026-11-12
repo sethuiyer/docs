@@ -1,6 +1,13 @@
-# Navokoj: The Arithmetic Manifold in Production
+---
+title: "Navokoj: The Arithmetic Manifold in Production"
+description: "How Navokoj turns discrete constraint problems into continuous geometric flow, with production benchmarks and verifiable results."
+date: "2026-06-19"
+author: "Sethurathienam Iyer"
+tags: ["Navokoj", "MaxSAT", "Product"]
+type: "Product note"
+---
 
-*Published June 2026*
+# Navokoj: The Arithmetic Manifold in Production
 
 ---
 
